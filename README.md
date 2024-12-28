@@ -146,3 +146,65 @@ git push -u origin main
 </body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Música e Botões</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>A Música começa automaticamente ao carregar o site!</h1>
+
+    <!-- Botões para controlar músicas -->
+    <button id="btn1">Música 1</button>
+    <button id="btn2">Música 2</button>
+
+    <audio id="audioPlayer" autoplay loop>
+        <source src="URL_DA_MÚSICA_1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Seleciona o áudio e os botões
+        var audio = document.getElementById('audioPlayer');
+        var btn1 = document.getElementById('btn1');
+        var btn2 = document.getElementById('btn2');
+
+        // Função para definir a música com base no botão clicado
+        function changeMusic(src) {
+            audio.src = src;
+            audio.play();
+        }
+
+        // Associa os botões às respectivas músicas
+        btn1.addEventListener('click', function() {
+            changeMusic('URL_DA_MÚSICA_1.mp3');
+        });
+
+        btn2.addEventListener('click', function() {
+            changeMusic('URL_DA_MÚSICA_2.mp3');
+        });
+    </script>
+
+</body>
+</html>
+
+ 
