@@ -12,7 +12,7 @@ git push -u origin main
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texto em Loop</title>
+    <title>Texto com Música e Fundo</title>
     <style>
         body {
             margin: 0;
@@ -36,11 +36,16 @@ git push -u origin main
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
         }
+
+        audio {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <audio autoplay loop>
         <source src="https://youtu.be/s7RRgF5Ve_E?si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
+        <source src="https://youtu.be/Wnv1eTH2BaA?si=s3NwNy4DBJM3F2Cb" type="audio/mpeg">
     </audio>
 
     <div class="text-content">
