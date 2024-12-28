@@ -76,7 +76,7 @@ git push -u origin main
 <body>
     <audio autoplay loop>
         <source src="https://www.youtube.com/watch?v=s7RRgF5Ve_E&si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
-        <source src="https://www.youtube.com/watch?v=Wnv1eTH2BaA&si=s3NwNy4DBJM3F2Cb" type="audio/mpeg">
+        <source src="https://www.youtube.com/watch?v=JMsP7fAcQtc&si=FJMsP7fAcQtc" type="audio/mpeg">
     </audio>
 
     <div class="text-content">
@@ -139,10 +139,10 @@ git push -u origin main
                 ]
             };
             
-            const textContent = document.querySelector('.text-content');
-            textContent.innerHTML = texts[lang].map(text => <p>${text}</p>).join('');
-            textContent.style.display = 'block';
+            const textContent = document.querySelector('.text-content p');
+            textContent.innerHTML = texts[lang].join('<br>');
         }
     </script>
 </body>
 </html>
+
