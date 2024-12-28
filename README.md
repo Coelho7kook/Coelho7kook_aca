@@ -12,47 +12,46 @@ git push -u origin main
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animação Romântica - Elder Ring</title>
+    <title>Site com Fundo Animado e Música</title>
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            background-color: #fbe5e0;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .content {
-            position: relative;
-            z-index: 1;
-            color: #6d4850;
-        }
-        .animation {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: url('https://example.com/path-to-your-pixel-art.gif') no-repeat center center;
+            padding: 0;
+            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
             background-size: cover;
-            opacity: 0.8;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="animation"></div>
-    <div class="content">
-        <h1>Miquela, a Guardiã da Esperança</h1>
-        <p>Em meio às brumas do Elder Ring, seus passos suave e delicados trazem paz àqueles que a cercam. Seu coração, puro e profundo, reflete a verdadeira essência do amor em sua forma mais bela.</p>
-    </div>
-</div>
-
+    <h1>Bem-vindo ao Nosso Espaço Romântico</h1>
+    <p>Desfrute do ambiente tranquilo e apaixonante.</p>
+    <p>Você não está sozinha, estamos aqui por você.</p>
+    <audio autoplay loop>
+        <source src="https://www.youtube.com/s7RRgF5Ve_E?si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
+        Seu navegador não suporta a tag de áudio.
+    </audio>
 </body>
 </html>
+
