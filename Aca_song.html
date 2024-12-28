@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Músicas em Loop</title>
+    <title>Texto em Loop</title>
     <style>
         body {
             margin: 0;
@@ -20,31 +20,31 @@
             overflow: hidden;
         }
 
-        audio {
-            display: none;
+        .text-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Músicas em Loop</h1>
-    <audio id="audio1" autoplay loop>
-        <source src="https://www.youtube.com/watch?v=0JvXFy91T4Q" type="audio/mpeg"> <!-- Undertale -->
-    </audio>
-    <audio id="audio2" autoplay loop>
-        <source src="https://youtu.be/Wnv1eTH2BaA?si=s3NwNy4DBJM3F2Cb" type="audio/mpeg"> <!-- Desalto -->
+    <audio autoplay loop>
+        <source src="https://youtu.be/s7RRgF5Ve_E?si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
     </audio>
 
-    <script>
-        var audio1 = document.getElementById('audio1');
-        var audio2 = document.getElementById('audio2');
+    <div class="text-content">
+        <p>Para Minha Amiga,  
+        Mesmo quando o mundo parece pesado, quero que saibas que não estás sozinha. O caminho pode ser difícil, e as sombras podem parecer mais profundas, mas a tua força é maior do que imaginas.</p>
 
-        audio1.addEventListener('ended', function() {
-            audio2.play();
-        });
+        <p>Assim como Miquella enfrenta suas batalhas, tu também és forte o suficiente para atravessar qualquer tempestade. Os momentos de dor são passageiros, e mesmo nos dias mais sombrios, há luz esperando para brilhar novamente.</p>
 
-        audio2.addEventListener('ended', function() {
-            audio1.play();
-        });
-    </script>
+        <p>Não deixe que a tristeza te domine, pois cada lágrima é um passo para o reencontro com tua paz interior. A vida, com suas incertezas, nos desafia, mas cada desafio nos ensina a valorizar ainda mais as pequenas coisas que trazem alegria.</p>
+
+        <p>Acredite em ti mesma, mesmo quando as palavras parecem falhar e o silêncio tenta preencher o vazio. Estamos todos conectados por sentimentos genuínos, e tua existência é um presente único.</p>
+
+        <p>Por isso, não temas seguir em frente, pois há sempre uma mão estendida, uma palavra de carinho, e um coração que sente profundamente a tua dor. Você é forte. Você é amada.</p>
+    </div>
 </body>
 </html>
