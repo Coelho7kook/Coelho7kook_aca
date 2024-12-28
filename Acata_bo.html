@@ -137,3 +137,107 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórias com Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #444;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #text-container {
+            margin: 20px 0;
+            display: none;
+        }
+        #text-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Histórias e Músicas</h1>
+    <button id="btn1">História em Português</button>
+    <button id="btn2">História em Inglês</button>
+
+    <div id="text-container">
+        <p id="text1">Esta é a história completa em português: "Era uma vez, num reino distante..."</p>
+        <p id="text2" style="display: none;">This is the full story in English: "Once upon a time, in a faraway kingdom..."</p>
+    </div>
+
+    <audio id="audio-player" autoplay loop>
+        <source id="audio-source" src="" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
+    </audio>
+
+    <script>
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const audioPlayer = document.getElementById('audio-player');
+        const audioSource = document.getElementById('audio-source');
+
+        // URLs das músicas
+        const music1 = "https://www.youtube.com/watch?v=JMsP7fAcQtc";
+        const music2 = "https://www.youtube.com/watch?v=s7RRgF5Ve_E";
+
+        // Função para alternar textos
+        function showText(language) {
+            text1.style.display = language === 'pt' ? 'block' : 'none';
+            text2.style.display = language === 'en' ? 'block' : 'none';
+        }
+
+        // Função para tocar música
+        function playMusic(url) {
+            audioSource.src = url;
+            audioPlayer.load();
+            audioPlayer.play();
+        }
+
+        // Eventos dos botões
+        btn1.addEventListener('click', function () {
+            showText('pt');
+            playMusic(music1);
+        });
+
+        btn2.addEventListener('click', function () {
+            showText('en');
+            playMusic(music2);
+        });
+
+        // Alternância automática entre as músicas
+        audioPlayer.addEventListener('ended', function () {
+            if (audioSource.src.includes(music1)) {
+                playMusic(music2);
+            } else {
+                playMusic(music1);
+            }
+        });
+
+        // Inicia com a música 1
+        playMusic(music1);
+        showText('pt');
+    </script>
+</body>
+</html>
