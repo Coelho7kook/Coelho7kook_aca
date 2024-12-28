@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Músicas em Loop</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Músicas em Loop</h1>
+    <audio id="audio1" autoplay loop>
+        <source src="https://www.youtube.com/watch?v=0JvXFy91T4Q" type="audio/mpeg"> <!-- Undertale -->
+    </audio>
+    <audio id="audio2" autoplay loop>
+        <source src="https://youtu.be/Wnv1eTH2BaA?si=s3NwNy4DBJM3F2Cb" type="audio/mpeg"> <!-- Desalto -->
+    </audio>
+
+    <script>
+        var audio1 = document.getElementById('audio1');
+        var audio2 = document.getElementById('audio2');
+
+        audio1.addEventListener('ended', function() {
+            audio2.play();
+        });
+
+        audio2.addEventListener('ended', function() {
+            audio1.play();
+        });
+    </script>
+</body>
+</html>
