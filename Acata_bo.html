@@ -184,7 +184,7 @@
 </head>
 <body>
     <h1>Histórias e Músicas</h1>
-    
+
     <!-- Botões de idioma -->
     <button id="btn-pt">Português</button>
     <button id="btn-en">English</button>
@@ -216,45 +216,40 @@
         const btnRu = document.getElementById('btn-ru');
 
         // Seletores de textos
-        const texts = {
-            pt: document.getElementById('text-pt'),
-            en: document.getElementById('text-en'),
-            jp: document.getElementById('text-jp'),
-            ru: document.getElementById('text-ru')
-        };
+        const textPt = document.getElementById('text-pt');
+        const textEn = document.getElementById('text-en');
+        const textJp = document.getElementById('text-jp');
+        const textRu = document.getElementById('text-ru');
 
-        // Player de áudio
-        const audioPlayer = document.getElementById('audio-player');
-        const audioSource = document.getElementById('audio-source');
+        // Função para alterar o idioma
+        function setLanguage(lang) {
+            textPt.classList.remove('active');
+            textEn.classList.remove('active');
+            textJp.classList.remove('active');
+            textRu.classList.remove('active');
 
-        // URLs das músicas
-        const musicTracks = [
-            'https://www.youtube.com/watch?v=JMsP7fAcQtc',
-            'https://www.youtube.com/watch?v=s7RRgF5Ve_E'
-        ];
-
-        // Função para tocar música aleatória
-        function playRandomMusic() {
-            const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
-            audioSource.src = randomTrack;
-            audioPlayer.load();
-            audioPlayer.play();
+            switch(lang) {
+                case 'pt':
+                    textPt.classList.add('active');
+                    break;
+                case 'en':
+                    textEn.classList.add('active');
+                    break;
+                case 'jp':
+                    textJp.classList.add('active');
+                    break;
+                case 'ru':
+                    textRu.classList.add('active');
+                    break;
+            }
         }
 
-        // Inicializar com música aleatória
-        playRandomMusic();
-
-        // Função para trocar textos
-        function switchText(language) {
-            Object.values(texts).forEach(text => text.classList.remove('active'));
-            texts[language].classList.add('active');
-        }
-
-        // Event listeners para os botões
-        btnPt.addEventListener('click', () => switchText('pt'));
-        btnEn.addEventListener('click', () => switchText('en'));
-        btnJp.addEventListener('click', () => switchText('jp'));
-        btnRu.addEventListener('click', () => switchText('ru'));
+        // Eventos de clique nos botões
+        btnPt.addEventListener('click', () => setLanguage('pt'));
+        btnEn.addEventListener('click', () => setLanguage('en'));
+        btnJp.addEventListener('click', () => setLanguage('jp'));
+        btnRu.addEventListener('click', () => setLanguage('ru'));
     </script>
 </body>
 </html>
+
