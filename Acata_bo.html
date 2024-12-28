@@ -168,76 +168,93 @@
         }
         #text-container {
             margin: 20px 0;
+        }
+        .text {
             display: none;
         }
-        #text-container.active {
+        .text.active {
             display: block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Histórias e Músicas</h1>
-    <button id="btn1">História em Português</button>
-    <button id="btn2">História em Inglês</button>
+    
+    <!-- Botões de idioma -->
+    <button id="btn-pt">Português</button>
+    <button id="btn-en">English</button>
+    <button id="btn-jp">日本語</button>
+    <button id="btn-ru">Русский</button>
 
+    <!-- Container de texto -->
     <div id="text-container">
-        <p id="text1">Esta é a história completa em português: "Era uma vez, num reino distante..."</p>
-        <p id="text2" style="display: none;">This is the full story in English: "Once upon a time, in a faraway kingdom..."</p>
+        <p id="text-pt" class="text active">Era uma vez, num reino distante...</p>
+        <p id="text-en" class="text">Once upon a time, in a faraway kingdom...</p>
+        <p id="text-jp" class="text">むかしむかし、遠い王国で...</p>
+        <p id="text-ru" class="text">Давным-давно, в далеком королевстве...</p>
     </div>
 
-    <audio id="audio-player" autoplay loop>
+    <!-- GIF ilustrativo -->
+    <img id="gif" src="https://media.giphy.com/media/l3vRnBKzTssWyv2KI/giphy.gif" alt="Imagem ilustrativa">
+
+    <!-- Player de áudio -->
+    <audio id="audio-player" autoplay>
         <source id="audio-source" src="" type="audio/mpeg">
         Seu navegador não suporta a reprodução de áudio.
     </audio>
 
     <script>
-        const btn1 = document.getElementById('btn1');
-        const btn2 = document.getElementById('btn2');
-        const text1 = document.getElementById('text1');
-        const text2 = document.getElementById('text2');
+        // Seletores de botões
+        const btnPt = document.getElementById('btn-pt');
+        const btnEn = document.getElementById('btn-en');
+        const btnJp = document.getElementById('btn-jp');
+        const btnRu = document.getElementById('btn-ru');
+
+        // Seletores de textos
+        const texts = {
+            pt: document.getElementById('text-pt'),
+            en: document.getElementById('text-en'),
+            jp: document.getElementById('text-jp'),
+            ru: document.getElementById('text-ru')
+        };
+
+        // Player de áudio
         const audioPlayer = document.getElementById('audio-player');
         const audioSource = document.getElementById('audio-source');
 
         // URLs das músicas
-        const music1 = "https://www.youtube.com/watch?v=JMsP7fAcQtc";
-        const music2 = "https://www.youtube.com/watch?v=s7RRgF5Ve_E";
+        const musicTracks = [
+            'https://www.youtube.com/watch?v=JMsP7fAcQtc',
+            'https://www.youtube.com/watch?v=s7RRgF5Ve_E'
+        ];
 
-        // Função para alternar textos
-        function showText(language) {
-            text1.style.display = language === 'pt' ? 'block' : 'none';
-            text2.style.display = language === 'en' ? 'block' : 'none';
-        }
-
-        // Função para tocar música
-        function playMusic(url) {
-            audioSource.src = url;
+        // Função para tocar música aleatória
+        function playRandomMusic() {
+            const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
+            audioSource.src = randomTrack;
             audioPlayer.load();
             audioPlayer.play();
         }
 
-        // Eventos dos botões
-        btn1.addEventListener('click', function () {
-            showText('pt');
-            playMusic(music1);
-        });
+        // Inicializar com música aleatória
+        playRandomMusic();
 
-        btn2.addEventListener('click', function () {
-            showText('en');
-            playMusic(music2);
-        });
+        // Função para trocar textos
+        function switchText(language) {
+            Object.values(texts).forEach(text => text.classList.remove('active'));
+            texts[language].classList.add('active');
+        }
 
-        // Alternância automática entre as músicas
-        audioPlayer.addEventListener('ended', function () {
-            if (audioSource.src.includes(music1)) {
-                playMusic(music2);
-            } else {
-                playMusic(music1);
-            }
-        });
-
-        // Inicia com a música 1
-        playMusic(music1);
-        showText('pt');
+        // Event listeners para os botões
+        btnPt.addEventListener('click', () => switchText('pt'));
+        btnEn.addEventListener('click', () => switchText('en'));
+        btnJp.addEventListener('click', () => switchText('jp'));
+        btnRu.addEventListener('click', () => switchText('ru'));
     </script>
 </body>
 </html>
