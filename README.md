@@ -76,12 +76,12 @@ git push -u origin main
         </div>
 
         <div>
-            <button class="btn" onclick="playOrPauseMusic()">Tocar/Pausar Música</button>
+            <button class="btn" onclick="playMusic()">Tocar Música</button>
             <button class="btn" onclick="changeMusic()">Mudar Música</button>
         </div>
     </div>
 
-    <audio id="audio-player" loop></audio>
+    <iframe id="music-player" width="0" height="0" style="border: none;" allow="autoplay"></iframe>
 
     <script>
         const texts = {
@@ -100,15 +100,13 @@ git push -u origin main
         };
 
         const musicTracks = [
-            'music1.mp3',
-            'music2.mp3',
-            'music3.mp3'
+            "https://www.youtube.com/embed/s7RRgF5Ve_E?autoplay=1",
+            "https://www.youtube.com/embed/Wnv1eTH2BaA?autoplay=1"
         ];
 
         let currentText = 0; // 0 for text1, 1 for text2
         let currentLanguage = 'pt';
         let currentMusicIndex = 0;
-        let isMusicPlaying = false;
 
         function changeLanguage(language) {
             currentLanguage = language;
@@ -133,25 +131,15 @@ git push -u origin main
             updateText();
         }
 
-        function playOrPauseMusic() {
-            const audio = document.getElementById('audio-player');
-            if (isMusicPlaying) {
-                audio.pause();
-                isMusicPlaying = false;
-            } else {
-                audio.src = musicTracks[currentMusicIndex];
-                audio.play();
-                isMusicPlaying = true;
-            }
+        function playMusic() {
+            const musicPlayer = document.getElementById('music-player');
+            musicPlayer.src = musicTracks[currentMusicIndex];
         }
 
         function changeMusic() {
-            const audio = document.getElementById('audio-player');
+            const musicPlayer = document.getElementById('music-player');
             currentMusicIndex = (currentMusicIndex + 1) % musicTracks.length;
-            audio.src = musicTracks[currentMusicIndex];
-            if (isMusicPlaying) {
-                audio.play();
-            }
+            musicPlayer.src = musicTracks[currentMusicIndex];
         }
     </script>
 </body>
