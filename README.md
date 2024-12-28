@@ -12,7 +12,7 @@ git push -u origin main
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site com Fundo Animado e Música</title>
+    <title>Fundo com GIF e Música</title>
     <style>
         body {
             margin: 0;
@@ -40,14 +40,14 @@ git push -u origin main
         }
 
         audio {
-            display: none;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <h1>Bem-vindo ao Nosso Espaço Romântico</h1>
-    <p>Desfrute do ambiente tranquilo e apaixonante.</p>
-    <p>Você não está sozinha, estamos aqui por você.</p>
+    <h1></h1> <!-- Título ficará oculto -->
+    <p></p> <!-- Primeiro parágrafo ficará oculto -->
+    <p></p> <!-- Segundo parágrafo ficará oculto -->
     <audio autoplay loop>
         <source src="https://www.youtube.com/s7RRgF5Ve_E?si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
         Seu navegador não suporta a tag de áudio.
@@ -55,3 +55,5 @@ git push -u origin main
 </body>
 </html>
 
+
+   
