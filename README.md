@@ -102,24 +102,21 @@ git push -u origin main
     </div>
 
     <script>
-        // Lista de URLs de áudio
+        // Lista de URLs de áudio para reprodução aleatória
         const audioLinks = [
-            "audio1.mp3",  // Substitua com o caminho correto do seu arquivo
-            "audio2.mp3",  // Substitua com o caminho correto do seu arquivo
-            "audio3.mp3",  // Substitua com o caminho correto do seu arquivo
-            "audio4.mp3",  // Substitua com o caminho correto do seu arquivo
-            "audio5.mp3",  // Substitua com o caminho correto do seu arquivo
-            "audio6.mp3"   // Substitua com o caminho correto do seu arquivo
+            "https://m.youtube.com/watch?v=s7RRgF5Ve_E&pp=ygUgdW5kZXJ0YWxlIG51c2ljIG9uY2UgdXBvbiBhIHRpbWU%3D",
+            "https://m.youtube.com/watch?v=InkKkTcw9_A&pp=ygUiemVsZGEgb2NhcmluYSBvZiB0aW1lIGVuZGluZyB0aGVtZQ%3D%3D",
+            "https://m.youtube.com/watch?v=v9l52KilyLU&pp=ygUSemVsZGEgc29uZyBoZWFsaW5n",
+            "https://m.youtube.com/watch?v=8FuRsZ7U4BU",
+            "https://m.youtube.com/watch?v=AvaLLgG8yaE&pp=ygULZmFsbGVuIGRvd24%3D"
         ];
 
-        let currentAudioIndex = 0;
-
-        // Função para tocar o próximo áudio
-        function nextAudio() {
+        // Função para tocar áudio aleatório
+        function playRandomAudio() {
+            const randomIndex = Math.floor(Math.random() * audioLinks.length);
             const audioPlayer = document.getElementById('audio-player');
             const audioSource = document.getElementById('audio-source');
-            currentAudioIndex = (currentAudioIndex + 1) % audioLinks.length;
-            audioSource.src = audioLinks[currentAudioIndex];
+            audioSource.src = audioLinks[randomIndex];
             audioPlayer.load();
             audioPlayer.play();
         }
@@ -128,7 +125,7 @@ git push -u origin main
         function toggleText() {
             const textContent = document.querySelector('.text-content');
             textContent.style.display = 'block';
-            nextAudio();  // Tocar o próximo áudio ao clicar no botão
+            playRandomAudio();  // Tocar o som ao clicar no botão
         }
 
         function setLanguage(lang) {
@@ -151,8 +148,7 @@ git push -u origin main
                     "私の友へ、世界が重く感じられるときでも、あなたがひとりではないことを知ってほしい。道は難しいかもしれませんし、影がより深く感じられるかもしれませんが、あなたの強さは想像以上です。",
                     "ミケラが直面する戦いのように、あなたもあらゆる嵐を乗り越える力があります。痛みの瞬間は一時的であり、最も暗い日々でも再び輝き始める光が待っています。",
                     "悲しみがあなたを支配させてはならない、それぞれの涙はあなたの内なる平和に再接続するための一歩です。人生は不確実であり、それに挑戦しますが、各挑戦はさらに多くの楽しさをもたらす小さなことに価値を見出させます。",
-                    "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさ
-"自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
+                    "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
                     "だから、前進することを恐れないでください。いつでも手を差し伸べる手があり、優しい言葉があり、あなたの痛みを深く感じる心があります。あなたは強い。あなたは愛されています。"
                 ],
                 ru: [
@@ -167,15 +163,12 @@ git push -u origin main
             // Apresenta o texto correspondente ao idioma escolhido
             const textContent = document.querySelector('.text-content');
             textContent.innerHTML = texts[lang].map(p => `<p>${p}</p>`).join('');
-            textContent.style.display = 'block';  // Torna o texto visível
-
-            // Reinicia o áudio ao trocar de idioma
-            nextAudio();
+            playRandomAudio();  // Toca o áudio aleatório ao mudar o idioma
         }
 
         // Toca o áudio aleatório quando a página é carregada
         window.onload = function() {
-            nextAudio();
+            playRandomAudio();
         }
     </script>
 </body>
