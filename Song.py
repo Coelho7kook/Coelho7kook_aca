@@ -1,50 +1,79 @@
-import pygame
-import random
-import time
-from pytube import YouTube
-import os
-import requests
-from io import BytesIO
+from flask import Flask, render_template_string
 
-# Inicializa o mixer do pygame para áudio
-pygame.mixer.init()
+app = Flask(__name__)
 
-# Lista de links do YouTube para as músicas
-musicas_links = [
-    "https://www.youtube.com/watch?v=s7RRgF5Ve_E",  # Música 1
-    "https://www.youtube.com/watch?v=InkKkTcw9_A",  # Música 2
-    "https://www.youtube.com/watch?v=v9l52KilyLU",  # Música 3
-    "https://www.youtube.com/watch?v=8FuRsZ7U4BU",  # Música 4
-    "https://www.youtube.com/watch?v=AvaLLgG8yaE",  # Música 5
-]
+# Código HTML embutido diretamente no Python
+html_code = """
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprodutor de Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        iframe {
+            display: none;  /* O vídeo ficará invisível */
+        }
+    </style>
+</head>
+<body>
+    <h1>Reprodutor de Música Aleatória</h1>
+    
+    <!-- Botões para selecionar o idioma -->
+    <button onclick="tocarMusicaAleatoria()">Tocar Música</button>
+    
+    <!-- O iframe será usado para tocar o áudio do YouTube -->
+    <iframe id="player" width="560" height="315" 
+            src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
 
-# Função para baixar a música do YouTube
-def baixar_musica(link):
-    yt = YouTube(link)
-    stream = yt.streams.filter(only_audio=True).first()  # Filtra a melhor stream de áudio
-    audio_file = stream.download(filename='temp_audio.mp4')  # Baixa o áudio como arquivo temporário
-    return audio_file
+    <script>
+        const musicasLinks = [
+            "https://www.youtube.com/embed/s7RRgF5Ve_E?autoplay=1",  // Música 1
+            "https://www.youtube.com/embed/InkKkTcw9_A?autoplay=1",  // Música 2
+            "https://www.youtube.com/embed/v9l52KilyLU?autoplay=1",  // Música 3
+            "https://www.youtube.com/embed/8FuRsZ7U4BU?autoplay=1",  // Música 4
+            "https://www.youtube.com/embed/AvaLLgG8yaE?autoplay=1",  // Música 5
+        ];
 
-# Função para tocar música aleatória
-def tocar_musica_aleatoria():
-    musica_escolhida = random.choice(musicas_links)  # Escolhe uma música aleatoriamente
-    arquivo_audio = baixar_musica(musica_escolhida)  # Baixa o arquivo de áudio
-    pygame.mixer.music.load(arquivo_audio)  # Carrega o arquivo de música
-    pygame.mixer.music.play()  # Reproduz a música
+        // Função para tocar música aleatória ao clicar no botão
+        function tocarMusicaAleatoria() {
+            const randomIndex = Math.floor(Math.random() * musicasLinks.length);
+            const iframe = document.getElementById("player");
+            iframe.src = musicasLinks[randomIndex];  // Muda o src do iframe para o link escolhido
+        }
 
-# Função para tocar a música automaticamente ao iniciar o programa
-def iniciar():
-    print("Iniciando a música aleatória...")
-    tocar_musica_aleatoria()
+        // Tocar música automaticamente ao carregar a página
+        window.onload = function() {
+            tocarMusicaAleatoria();  // Inicia a música aleatória assim que a página carrega
+        };
+    </script>
+</body>
+</html>
+"""
 
-# Função principal
-if __name__ == "__main__":
-    iniciar()
+@app.route('/')
+def index():
+    return render_template_string(html_code)  # Carrega o HTML diretamente do Python
 
-    # Mantém o programa rodando enquanto a música está tocando
-    while pygame.mixer.music.get_busy():
-        time.sleep(1)  # Aguarda 1 segundo entre as verificações
-
-    # Exclui o arquivo temporário após a reprodução
-    if os.path.exists('temp_audio.mp4'):
-        os.remove('temp_audio.mp4')
+if __name__ == '__main__':
+    app.run(debug=True)  # Roda o servidor Flask
