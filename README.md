@@ -74,9 +74,9 @@ git push -u origin main
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="https://www.youtube.com/watch?v=s7RRgF5Ve_E&si=WTVDMJoNlHWg0ZIS" type="audio/mpeg">
-        <source src="https://www.youtube.com/watch?v=JMsP7fAcQtc&si=FJMsP7fAcQtc" type="audio/mpeg">
+    <!-- Áudio oculto e configurado para tocar aleatoriamente -->
+    <audio id="audio-player" autoplay loop>
+        <source id="audio-source" type="audio/mpeg">
     </audio>
 
     <div class="text-content">
@@ -102,9 +102,30 @@ git push -u origin main
     </div>
 
     <script>
+        // Lista de URLs de áudio para reprodução aleatória
+        const audioLinks = [
+            "https://m.youtube.com/watch?v=s7RRgF5Ve_E&pp=ygUgdW5kZXJ0YWxlIG51c2ljIG9uY2UgdXBvbiBhIHRpbWU%3D",
+            "https://m.youtube.com/watch?v=InkKkTcw9_A&pp=ygUiemVsZGEgb2NhcmluYSBvZiB0aW1lIGVuZGluZyB0aGVtZQ%3D%3D",
+            "https://m.youtube.com/watch?v=v9l52KilyLU&pp=ygUSemVsZGEgc29uZyBoZWFsaW5n",
+            "https://m.youtube.com/watch?v=8FuRsZ7U4BU",
+            "https://m.youtube.com/watch?v=AvaLLgG8yaE&pp=ygULZmFsbGVuIGRvd24%3D"
+        ];
+
+        // Função para tocar áudio aleatório
+        function playRandomAudio() {
+            const randomIndex = Math.floor(Math.random() * audioLinks.length);
+            const audioPlayer = document.getElementById('audio-player');
+            const audioSource = document.getElementById('audio-source');
+            audioSource.src = audioLinks[randomIndex];
+            audioPlayer.load();
+            audioPlayer.play();
+        }
+
+        // Função para alternar o texto com base no idioma
         function toggleText() {
             const textContent = document.querySelector('.text-content');
             textContent.style.display = 'block';
+            playRandomAudio();  // Tocar o som ao clicar no botão
         }
 
         function setLanguage(lang) {
@@ -127,144 +148,29 @@ git push -u origin main
                     "私の友へ、世界が重く感じられるときでも、あなたがひとりではないことを知ってほしい。道は難しいかもしれませんし、影がより深く感じられるかもしれませんが、あなたの強さは想像以上です。",
                     "ミケラが直面する戦いのように、あなたもあらゆる嵐を乗り越える力があります。痛みの瞬間は一時的であり、最も暗い日々でも再び輝き始める光が待っています。",
                     "悲しみがあなたを支配させてはならない、それぞれの涙はあなたの内なる平和に再接続するための一歩です。人生は不確実であり、それに挑戦しますが、各挑戦はさらに多くの楽しさをもたらす小さなことに価値を見出させます。",
-                    "自分自身を信じてください、言葉が失敗するようなときでも、沈黙が空白を埋めようとするときでも。私たちは真の感情でつながっていますし、あなたの存在は唯一の贈り物です。",
-                    "だから、前進することを恐れないでください、いつでも助けの手があり、親切な言葉があり、あなたの痛みに深く寄り添う心があります。あなたは強い。あなたは愛されています。"
+                    "自
+    "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
+                    "だから、前進することを恐れないでください。いつでも手を差し伸べる手があり、優しい言葉があり、あなたの痛みを深く感じる心があります。あなたは強い。あなたは愛されています。"
                 ],
                 ru: [
-                    "Для моего друга, Даже когда мир кажется тяжелым, я хочу, чтобы ты знал, что ты не один. Пути могут быть трудными, и тени могут казаться глубже, но твоя сила гораздо больше, чем ты думаешь.",
-                    "Как Микелла сталкивается с её сражениями, ты также силен, чтобы преодолеть любую бурю. Моменты боли мимолетны, и даже в самые темные дни есть свет, который снова готов сиять.",
-                    "Не позволяй печали овладеть тобой, ведь каждая слеза — это шаг к воссоединению с твоим внутренним спокойствием. Жизнь с её неуверенностями бросает вызов нам, но каждый вызов учит ценить даже маленькие вещи, приносящие радость.",
-                    "Верь в себя, даже когда слова кажутся бессильными, а молчание пытается заполнить пустоту. Мы связаны искренними чувствами, и твое существование — это уникальный дар.",
-                    "Поэтому не бойся идти вперед, ведь всегда есть протянутая рука помощи, доброе слово и сердце, которое глубоко чувствует твою боль. Ты сильный. Тебя любят."
+                    "Для моей подруги, Даже когда мир кажется тяжёлым, я хочу, чтобы ты знала, что ты не одна. Путь может быть трудным, а тени могут казаться более глубокими, но твоя сила гораздо больше, чем ты думаешь.",
+                    "Как и Микелла, сталкивающаяся со своими битвами, ты тоже достаточно сильна, чтобы преодолеть любую бурю. Моменты боли мимолётны, и даже в самые тёмные дни есть свет, который снова засияет.",
+                    "Не позволяй грусти овладеть тобой, потому что каждая слеза — это шаг к воссоединению с твоим внутренним миром. Жизнь полна неопределенности, она ставит перед нами испытания, но каждое испытание учит нас ценить ещё больше те маленькие вещи, которые приносят радость.",
+                    "Верь в себя, даже когда слова, кажется, не могут помочь, и тишина пытается заполнить пустоту. Мы все связаны искренними чувствами, и твоё существование — это уникальный подарок.",
+                    "Так что не бойся двигаться вперёд, потому что всегда есть протянутая рука, тёплое слово и сердце, которое глубоко чувствует твою боль. Ты сильная. Ты любима."
                 ]
             };
-            
-            const textContent = document.querySelector('.text-content p');
-            textContent.innerHTML = texts[lang].join('<br>');
-        }
-    </script>
-</body>
-</html>
 
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórias com Música</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #444;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #text-container {
-            margin: 20px 0;
-        }
-        .text {
-            display: none;
-        }
-        .text.active {
-            display: block;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Histórias e Músicas</h1>
-    
-    <!-- Botões de idioma -->
-    <button id="btn-pt">Português</button>
-    <button id="btn-en">English</button>
-    <button id="btn-jp">日本語</button>
-    <button id="btn-ru">Русский</button>
-
-    <!-- Container de texto -->
-    <div id="text-container">
-        <p id="text-pt" class="text active">Era uma vez, num reino distante...</p>
-        <p id="text-en" class="text">Once upon a time, in a faraway kingdom...</p>
-        <p id="text-jp" class="text">むかしむかし、遠い王国で...</p>
-        <p id="text-ru" class="text">Давным-давно, в далеком королевстве...</p>
-    </div>
-
-    <!-- GIF ilustrativo -->
-    <img id="gif" src="https://media.giphy.com/media/l3vRnBKzTssWyv2KI/giphy.gif" alt="Imagem ilustrativa">
-
-    <!-- Player de áudio -->
-    <audio id="audio-player" autoplay>
-        <source id="audio-source" src="" type="audio/mpeg">
-        Seu navegador não suporta a reprodução de áudio.
-    </audio>
-
-    <script>
-        // Seletores de botões
-        const btnPt = document.getElementById('btn-pt');
-        const btnEn = document.getElementById('btn-en');
-        const btnJp = document.getElementById('btn-jp');
-        const btnRu = document.getElementById('btn-ru');
-
-        // Seletores de textos
-        const texts = {
-            pt: document.getElementById('text-pt'),
-            en: document.getElementById('text-en'),
-            jp: document.getElementById('text-jp'),
-            ru: document.getElementById('text-ru')
-        };
-
-        // Player de áudio
-        const audioPlayer = document.getElementById('audio-player');
-        const audioSource = document.getElementById('audio-source');
-
-        // URLs das músicas
-        const musicTracks = [
-            'https://www.youtube.com/watch?v=JMsP7fAcQtc',
-            'https://www.youtube.com/watch?v=s7RRgF5Ve_E'
-        ];
-
-        // Função para tocar música aleatória
-        function playRandomMusic() {
-            const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
-            audioSource.src = randomTrack;
-            audioPlayer.load();
-            audioPlayer.play();
+            // Apresenta o texto correspondente ao idioma escolhido
+            const textContent = document.querySelector('.text-content');
+            textContent.innerHTML = texts[lang].map(p => `<p>${p}</p>`).join('');
+            playRandomAudio();  // Toca o áudio aleatório ao mudar o idioma
         }
 
-        // Inicializar com música aleatória
-        playRandomMusic();
-
-        // Função para trocar textos
-        function switchText(language) {
-            Object.values(texts).forEach(text => text.classList.remove('active'));
-            texts[language].classList.add('active');
+        // Toca o áudio aleatório quando a página é carregada
+        window.onload = function() {
+            playRandomAudio();
         }
-
-        // Event listeners para os botões
-        btnPt.addEventListener('click', () => switchText('pt'));
-        btnEn.addEventListener('click', () => switchText('en'));
-        btnJp.addEventListener('click', () => switchText('jp'));
-        btnRu.addEventListener('click', () => switchText('ru'));
     </script>
 </body>
 </html>
