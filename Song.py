@@ -1,107 +1,50 @@
-html_code = """
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texto com Tradução de Idiomas</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+import pygame
+import random
+import time
+from pytube import YouTube
+import os
+import requests
+from io import BytesIO
 
-        .text-content {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            display: none; /* Oculta o texto inicialmente */
-        }
+# Inicializa o mixer do pygame para áudio
+pygame.mixer.init()
 
-        audio {
-            display: none;
-        }
+# Lista de links do YouTube para as músicas
+musicas_links = [
+    "https://www.youtube.com/watch?v=s7RRgF5Ve_E",  # Música 1
+    "https://www.youtube.com/watch?v=InkKkTcw9_A",  # Música 2
+    "https://www.youtube.com/watch?v=v9l52KilyLU",  # Música 3
+    "https://www.youtube.com/watch?v=8FuRsZ7U4BU",  # Música 4
+    "https://www.youtube.com/watch?v=AvaLLgG8yaE",  # Música 5
+]
 
-        .button-play {
-            background-color: #ffb3d9; /* Rosa Claro Fofo */
-            color: white;
-            font-size: 20px;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+# Função para baixar a música do YouTube
+def baixar_musica(link):
+    yt = YouTube(link)
+    stream = yt.streams.filter(only_audio=True).first()  # Filtra a melhor stream de áudio
+    audio_file = stream.download(filename='temp_audio.mp4')  # Baixa o áudio como arquivo temporário
+    return audio_file
 
-        .button-play:hover {
-            background-color: #ff69b4; /* Rosa mais intenso */
-        }
+# Função para tocar música aleatória
+def tocar_musica_aleatoria():
+    musica_escolhida = random.choice(musicas_links)  # Escolhe uma música aleatoriamente
+    arquivo_audio = baixar_musica(musica_escolhida)  # Baixa o arquivo de áudio
+    pygame.mixer.music.load(arquivo_audio)  # Carrega o arquivo de música
+    pygame.mixer.music.play()  # Reproduz a música
 
-        .button-language {
-            margin: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            color: white;
-            background-color: #6a1b9a; /* Cores distintas para cada idioma */
-            font-size: 14px;
-            text-transform: none; /* Removendo transformação para manter minúsculas */
-        }
+# Função para tocar a música automaticamente ao iniciar o programa
+def iniciar():
+    print("Iniciando a música aleatória...")
+    tocar_musica_aleatoria()
 
-        .button-language:hover {
-            background-color: #4a148c;
-        }
-    </style>
-</head>
-<body>
-    <audio id="audio1">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio2">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio3">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
-    </audio>
+# Função principal
+if __name__ == "__main__":
+    iniciar()
 
-    <div class="text-content">
-        <!-- O conteúdo será inserido pela função JavaScript -->
-    </div>
+    # Mantém o programa rodando enquanto a música está tocando
+    while pygame.mixer.music.get_busy():
+        time.sleep(1)  # Aguarda 1 segundo entre as verificações
 
-    <button class="button-play" onclick="toggleText()">Por favor, clique aqui para algo especial</button>
-
-    <div>
-        <button class="button-language" onclick="setLanguage('pt')">Português</button>
-        <button class="button-language" onclick="setLanguage('en')">Inglês</button>
-        <button class="button-language" onclick="setLanguage('ja')">Japonês</button>
-        <button class="button-language" onclick="setLanguage('ru')">Russo</button>
-    </div>
-
-    <script>
-        let currentAudio = null;
-        const audioFiles = ['audio1', 'audio2', 'audio3'];
-
-        function toggleText() {
-            const textContent = document.querySelector('.text-content');
-            textContent.style.display = textContent.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function setLanguage(lang) {
-            const texts = {
-                pt: [
-                    "Para Minha Amiga, Mesmo quando o mundo parece pesado, quero que saibas que não estás sozinha. O caminho pode ser difícil, e as sombras podem parecer mais profundas, mas a tua força é maior do que imaginas.",
-                    "Assim como Miquella enfrenta suas batalhas, tu também és forte o suficiente para atravessar qualquer tempestade. Os momentos de dor são passageiros, e mesmo nos dias mais sombrios, há luz esperando para brilhar novamente.",
-                    "Não deixe que a tristeza te domine, pois cada lágrima é um passo para o reencontro com tua paz interior. A vida, com suas incertezas, nos desafia, mas cada desafio nos ensina a valorizar ainda mais as pequenas coisas que trazem alegria.",
-                    "Acred
+    # Exclui o arquivo temporário após a reprodução
+    if os.path.exists('temp_audio.mp4'):
+        os.remove('temp_audio.mp4')
