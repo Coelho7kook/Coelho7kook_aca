@@ -7,7 +7,8 @@ git branch -M main
 git remote add origin https://github.com/Coelho7kook/Coelho7kook_aca.git
 git push -u origin main
 
-<!DOCTYPE html>
+
+     <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -74,10 +75,9 @@ git push -u origin main
     </style>
 </head>
 <body>
-    <!-- Áudio oculto e configurado para tocar -->
+    <!-- Áudio oculto e configurado para tocar aleatoriamente -->
     <audio id="audio-player" autoplay loop>
-        <!-- A fonte será alterada dinamicamente via JavaScript -->
-        <source id="audio-source" type="audio/mpeg">
+        <source id="audio-source" type="audio/mp3">
     </audio>
 
     <div class="text-content">
@@ -103,38 +103,33 @@ git push -u origin main
     </div>
 
     <script>
-        // Função para alternar o texto com base no idioma
-        function toggleText() {
-            const textContent = document.querySelector('.text-content');
-            textContent.style.display = 'block';
-            playRandomAudio();  // Tocar o som aleatório ao clicar no botão
-        }
+        // Lista de URLs de áudio para reprodução aleatória
+        const audioLinks = [
+            "audio1.mp3", // Substitua com o caminho correto do seu arquivo
+            "audio2.mp3", 
+            "audio3.mp3", 
+            "audio4.mp3", 
+            "audio5.mp3",
+            "audio6.mp3"
+        ];
 
-        // Função para tocar o áudio aleatório
+        // Função para tocar áudio aleatório
         function playRandomAudio() {
-            const audioFiles = [
-                "audio1.mp3",
-                "audio2.mp3",
-                "audio3.mp3",
-                "audio4.mp3",
-                "audio5.mp3",
-                "audio6.mp3"
-            ];
-
-            // Seleciona um arquivo de áudio aleatório
-            const randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
-
-            // Atualiza o src do áudio com o arquivo aleatório
-            const audioSource = document.getElementById('audio-source');
-            audioSource.src = randomAudio;
-
-            // Recarrega o áudio para que a mudança de fonte funcione
+            const randomIndex = Math.floor(Math.random() * audioLinks.length);
             const audioPlayer = document.getElementById('audio-player');
+            const audioSource = document.getElementById('audio-source');
+            audioSource.src = audioLinks[randomIndex];
             audioPlayer.load();
             audioPlayer.play();
         }
 
-        // Função para mudar o idioma e texto
+        // Função para alternar o texto com base no idioma
+        function toggleText() {
+            const textContent = document.querySelector('.text-content');
+            textContent.style.display = 'block';
+            playRandomAudio();  // Tocar o som ao clicar no botão
+        }
+
         function setLanguage(lang) {
             const texts = {
                 pt: [
@@ -156,22 +151,30 @@ git push -u origin main
                     "ミケラが直面する戦いのように、あなたもあらゆる嵐を乗り越える力があります。痛みの瞬間は一時的であり、最も暗い日々でも再び輝き始める光が待っています。",
                     "悲しみがあなたを支配させてはならない、それぞれの涙はあなたの内なる平和に再接続するための一歩です。人生は不確実であり、それに挑戦しますが、各挑戦はさらに多くの楽しさをもたらす小さなことに価値を見出させます。",
                     "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
-                    "だから、前進することを恐れないでください。いつでも手を差し伸べる手があり、優しい言葉があり、あなたの痛み
-                    "だから、前進することを恐れないでください。いつでも手を差し伸べる手があり、優しい言葉があり、あなたの痛みを深く感じる心があります。あなたは強い。あなたは愛されています。"
+                    "だから、前進することを恐れないでください。いつでも手を差し   
+                    "だから、前進することを恐れないでください。いつでも手を差し伸べてくれる人がいて、優しい言葉があり、あなたの痛みを深く感じてくれる心があります。あなたは強い。あなたは愛されています。"
                 ],
                 ru: [
-                    "Для моей подруги, Даже когда мир кажется тяжёлым, я хочу, чтобы ты знала, что ты не одна. Путь может быть трудным, а тени могут казаться более глубокими, но твоя сила гораздо больше, чем ты думаешь.",
-                    "Как и Микелла, сталкивающаяся со своими битвами, ты тоже достаточно сильна, чтобы преодолеть любую бурю. Моменты боли мимолетны, и даже в самые тёмные дни есть свет, который ждёт, чтобы снова загореться.",
-                    "Не позволяй грусти овладеть тобой, каждая слеза — это шаг к восстановлению внутреннего мира. Жизнь, с её неопределенностями, бросает нам вызов, но каждый вызов учит нас ценить маленькие вещи, которые приносят радость.",
-                    "Верь в себя, даже когда слова кажутся пустыми, а молчание пытается заполнить пустоту. Мы все связаны искренними чувствами, и твоё существование — это уникальный подарок.",
-                    "Поэтому не бойся двигаться вперёд, ведь всегда есть протянутая рука, тёплое слово и сердце, которое глубоко чувствует твою боль. Ты сильна. Ты любима."
+                    "Для моей подруги, Даже когда мир кажется тяжёлым, я хочу, чтобы ты знала, что ты не одна. Путь может быть трудным, и тени могут казаться глубже, но твоя сила больше, чем ты думаешь.",
+                    "Как и Микелла, которая сражается со своими проблемами, ты тоже достаточно сильна, чтобы пройти через любой шторм. Моменты боли временные, и даже в самые тёмные дни есть свет, который снова будет сиять.",
+                    "Не позволяй грусти одержать победу, ведь каждая слеза — это шаг к воссоединению с твоим внутренним миром. Жизнь, с её неопределенностью, бросает нам вызовы, но каждый вызов учит нас ценить те маленькие вещи, которые приносят радость.",
+                    "Верь в себя, даже когда слова не приходят, а тишина пытается заполнить пустоту. Мы все связаны настоящими чувствами, и твоё существование — это уникальный подарок.",
+                    "Так что не бойся двигаться вперёд, ведь всегда есть протянутая рука, добрые слова и сердце, которое глубоко чувствует твою боль. Ты сильна. Ты любима."
                 ]
             };
 
-            const languageTexts = texts[lang];
+            // Atualiza o conteúdo com base na linguagem escolhida
             const textContent = document.querySelector('.text-content');
-            textContent.innerHTML = languageTexts.map(p => `<p>${p}</p>`).join('');
+            const paragraphs = textContent.querySelectorAll('p');
+            const langTexts = texts[lang];
+
+            langTexts.forEach((text, index) => {
+                if (paragraphs[index]) {
+                    paragraphs[index].textContent = text;
+                }
+            });
         }
+
     </script>
 </body>
 </html>
