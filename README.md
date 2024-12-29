@@ -7,8 +7,7 @@ git branch -M main
 git remote add origin https://github.com/Coelho7kook/Coelho7kook_aca.git
 git push -u origin main
 
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -75,7 +74,7 @@ git push -u origin main
     </style>
 </head>
 <body>
-    <!-- Áudio oculto e configurado para tocar -->
+    <!-- Áudio oculto e configurado para tocar aleatoriamente -->
     <audio id="audio-player" autoplay loop>
         <source id="audio-source" type="audio/mpeg">
     </audio>
@@ -93,7 +92,7 @@ git push -u origin main
         <p>Por isso, não temas seguir em frente, pois há sempre uma mão estendida, uma palavra de carinho, e um coração que sente profundamente a tua dor. Você é forte. Você é amada.</p>
     </div>
 
-    <button class="button-play" onclick="nextAudio()">Clique para algo especial</button>
+    <button class="button-play" onclick="toggleText()">Por favor, clique aqui para algo especial</button>
 
     <div>
         <button class="button-language" onclick="setLanguage('pt')">Português</button>
@@ -103,37 +102,33 @@ git push -u origin main
     </div>
 
     <script>
-        // Lista de URLs de áudio com seus respectivos arquivos
+        // Lista de URLs de áudio
         const audioLinks = [
-            "audio1.mp3",
-            "audio2.mp3",
-            "audio3.mp3",
-            "audio4.mp3",
-            "audio5.mp3",
-            "audio6.mp3"
+            "audio1.mp3",  // Substitua com o caminho correto do seu arquivo
+            "audio2.mp3",  // Substitua com o caminho correto do seu arquivo
+            "audio3.mp3",  // Substitua com o caminho correto do seu arquivo
+            "audio4.mp3",  // Substitua com o caminho correto do seu arquivo
+            "audio5.mp3",  // Substitua com o caminho correto do seu arquivo
+            "audio6.mp3"   // Substitua com o caminho correto do seu arquivo
         ];
 
-        let currentAudioIndex = 0;  // Controlador do áudio atual
+        let currentAudioIndex = 0;
 
-        // Função para tocar o próximo áudio na sequência
+        // Função para tocar o próximo áudio
         function nextAudio() {
             const audioPlayer = document.getElementById('audio-player');
             const audioSource = document.getElementById('audio-source');
-            
-            // Atualiza a fonte do áudio com base no índice atual
-            audioSource.src = audioLinks[currentAudioIndex];
-            audioPlayer.load();  // Recarrega o áudio
-            audioPlayer.play();  // Inicia a reprodução
-
-            // Atualiza o índice do próximo áudio (voltando ao primeiro após o último)
             currentAudioIndex = (currentAudioIndex + 1) % audioLinks.length;
+            audioSource.src = audioLinks[currentAudioIndex];
+            audioPlayer.load();
+            audioPlayer.play();
         }
 
         // Função para alternar o texto com base no idioma
         function toggleText() {
             const textContent = document.querySelector('.text-content');
             textContent.style.display = 'block';
-            nextAudio();  // Toca o áudio ao clicar no botão
+            nextAudio();  // Tocar o próximo áudio ao clicar no botão
         }
 
         function setLanguage(lang) {
@@ -155,9 +150,9 @@ git push -u origin main
                 ja: [
                     "私の友へ、世界が重く感じられるときでも、あなたがひとりではないことを知ってほしい。道は難しいかもしれませんし、影がより深く感じられるかもしれませんが、あなたの強さは想像以上です。",
                     "ミケラが直面する戦いのように、あなたもあらゆる嵐を乗り越える力があります。痛みの瞬間は一時的であり、最も暗い日々でも再び輝き始める光が待っています。",
-                    "悲しみがあなたを支配させてはならない、それぞれの涙はあなたの内なる平和に再接続するための一歩です。人生は不確実であり、それに挑戦しますが、各挑戦はさらに多くの楽しさをもたらす小さな
-                    "楽しい小さなことに価値を見出させます。",
-                    "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
+                    "悲しみがあなたを支配させてはならない、それぞれの涙はあなたの内なる平和に再接続するための一歩です。人生は不確実であり、それに挑戦しますが、各挑戦はさらに多くの楽しさをもたらす小さなことに価値を見出させます。",
+                    "自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさ
+"自分自身を信じてください、言葉が失われ、沈黙が空虚を満たそうとする時でさえ。私たちは皆、真実の感情で繋がっており、あなたの存在は唯一無二の贈り物です。",
                     "だから、前進することを恐れないでください。いつでも手を差し伸べる手があり、優しい言葉があり、あなたの痛みを深く感じる心があります。あなたは強い。あなたは愛されています。"
                 ],
                 ru: [
@@ -171,15 +166,16 @@ git push -u origin main
 
             // Apresenta o texto correspondente ao idioma escolhido
             const textContent = document.querySelector('.text-content');
-            // Limpa o conteúdo do texto antes de adicionar o novo conteúdo
             textContent.innerHTML = texts[lang].map(p => `<p>${p}</p>`).join('');
-            textContent.style.display = 'block';  // Garante que o texto seja visível ao trocar de idioma
-            nextAudio();  // Toca o áudio aleatório ao mudar o idioma
+            textContent.style.display = 'block';  // Torna o texto visível
+
+            // Reinicia o áudio ao trocar de idioma
+            nextAudio();
         }
 
         // Toca o áudio aleatório quando a página é carregada
         window.onload = function() {
-            nextAudio();  // Garante que o áudio comece automaticamente ao carregar a página
+            nextAudio();
         }
     </script>
 </body>
