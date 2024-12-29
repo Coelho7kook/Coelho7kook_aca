@@ -155,3 +155,92 @@
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reprodutor de Música Aleatório</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    #audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="button-container">
+    <button class="button" onclick="playRandomMusic()">Clique para Reproduzir Música</button>
+  </div>
+
+  <!-- Áudio invisível -->
+  <audio id="audio" autoplay>
+    <source id="audioSource" src="" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // URLs das músicas (vídeos do YouTube convertidos em áudio)
+    const musicUrls = [
+      "https://www.youtube.com/watch?v=s7RRgF5Ve_E", // Exemplo 1
+      "https://www.youtube.com/watch?v=InkKkTcw9_A", // Exemplo 2
+      "https://www.youtube.com/watch?v=v9l52KilyLU", // Exemplo 3
+      "https://www.youtube.com/watch?v=8FuRsZ7U4BU", // Exemplo 4
+      "https://www.youtube.com/watch?v=AvaLLgG8yaE"  // Exemplo 5
+    ];
+
+    // Função para tocar uma música aleatória
+    function playRandomMusic() {
+      // Gerar um índice aleatório para escolher uma música
+      const randomIndex = Math.floor(Math.random() * musicUrls.length);
+      
+      // URL do vídeo aleatório
+      const randomMusicUrl = musicUrls[randomIndex];
+      
+      // Atualiza a fonte de áudio com o link escolhido
+      const audio = document.getElementById('audio');
+      const audioSource = document.getElementById('audioSource');
+      
+      // Alterar para um link de áudio (convertido de YouTube, com a estrutura adequada)
+      const audioFileUrl = randomMusicUrl.replace("watch?v=", "v/").concat("/audio.mp3");
+      
+      audioSource.src = audioFileUrl;
+      audio.load(); // Carrega o novo áudio
+      audio.play(); // Reproduz o áudio
+    }
+
+    // Reproduz o áudio automaticamente quando a página carregar
+    window.onload = function() {
+      playRandomMusic();  // Reproduz a música aleatória automaticamente ao carregar
+    };
+  </script>
+
+</body>
+    </html>
