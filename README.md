@@ -173,3 +173,168 @@ git push -u origin main
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto com Tradução de Idiomas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .text-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            display: none; /* Oculta o texto inicialmente */
+        }
+
+        .button-play {
+            background-color: #ffb3d9; /* Rosa Claro Fofo */
+            color: white;
+            font-size: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button-play:hover {
+            background-color: #ff69b4; /* Rosa mais intenso */
+        }
+
+        .button-language {
+            margin: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            color: white;
+            background-color: #6a1b9a;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .button-language:hover {
+            background-color: #4a148c;
+        }
+
+        .audio-buttons {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .audio-buttons button {
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .audio-buttons button:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Texto -->
+    <div class="text-content">
+        <p>Para Minha Amiga,  
+        Mesmo quando o mundo parece pesado, quero que saibas que não estás sozinha...</p>
+    </div>
+
+    <!-- Botão para ativar texto -->
+    <button class="button-play" onclick="toggleText()">Por favor, clique aqui para algo especial</button>
+
+    <!-- Botões de idioma -->
+    <div>
+        <button class="button-language" onclick="setLanguage('pt')">Português</button>
+        <button class="button-language" onclick="setLanguage('en')">Inglês</button>
+        <button class="button-language" onclick="setLanguage('ja')">Japonês</button>
+        <button class="button-language" onclick="setLanguage('ru')">Russo</button>
+    </div>
+
+    <!-- Botões de controle de áudio -->
+    <div class="audio-buttons">
+        <button id="previous">⏮️</button>
+        <button id="play">▶️</button>
+        <button id="pause">⏸️</button>
+        <button id="next">⏭️</button>
+    </div>
+
+    <script>
+        const audioFiles = [
+            "audio1.mp3",
+            "audio2.mp3",
+            "audio3.mp3",
+            "audio4.mp3",
+            "audio5.mp3",
+            "audio6.mp3"
+        ];
+
+        let currentAudioIndex = 0;
+        const audio = new Audio(audioFiles[currentAudioIndex]);
+
+        // Botões de controle de áudio
+        document.getElementById("play").addEventListener("click", () => {
+            audio.play();
+        });
+
+        document.getElementById("pause").addEventListener("click", () => {
+            audio.pause();
+        });
+
+        document.getElementById("next").addEventListener("click", () => {
+            currentAudioIndex = (currentAudioIndex + 1) % audioFiles.length;
+            audio.src = audioFiles[currentAudioIndex];
+            audio.play();
+        });
+
+        document.getElementById("previous").addEventListener("click", () => {
+            currentAudioIndex =
+                (currentAudioIndex - 1 + audioFiles.length) % audioFiles.length;
+            audio.src = audioFiles[currentAudioIndex];
+            audio.play();
+        });
+
+        // Funções existentes
+        function toggleText() {
+            const textContent = document.querySelector('.text-content');
+            textContent.style.display = 'block';
+        }
+
+        function setLanguage(lang) {
+            // Alterar idioma do texto
+            console.log(`Idioma alterado para: ${lang}`);
+        }
+    </script>
+</body>
+</html>
