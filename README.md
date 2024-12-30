@@ -174,6 +174,7 @@ git push -u origin main
 </body>
 </html>
 
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -206,7 +207,7 @@ git push -u origin main
         }
 
         .button-play {
-            background-color: #ffb3d9; /* Rosa Claro Fofo */
+            background-color: #ffb3d9; /* Rosa Claro */
             color: white;
             font-size: 20px;
             padding: 15px 30px;
@@ -217,7 +218,7 @@ git push -u origin main
         }
 
         .button-play:hover {
-            background-color: #ff69b4; /* Rosa mais intenso */
+            background-color: #ff69b4; /* Rosa Intenso */
         }
 
         .button-language {
@@ -236,30 +237,27 @@ git push -u origin main
         }
 
         .audio-buttons {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             justify-content: center;
             gap: 15px;
+            margin-top: 20px;
         }
 
         .audio-buttons button {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.5); /* Semitransparente */
             border: none;
             color: #000;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             transition: background 0.3s, transform 0.3s;
         }
 
         .audio-buttons button:hover {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.8); /* Destaque ao passar o mouse */
             transform: scale(1.1);
         }
     </style>
@@ -267,11 +265,10 @@ git push -u origin main
 <body>
     <!-- Texto -->
     <div class="text-content">
-        <p>Para Minha Amiga,  
-        Mesmo quando o mundo parece pesado, quero que saibas que não estás sozinha...</p>
+        <p>Para Minha Amiga, Mesmo quando o mundo parece pesado...</p>
     </div>
 
-    <!-- Botão para ativar texto -->
+    <!-- Botão para exibir texto -->
     <button class="button-play" onclick="toggleText()">Por favor, clique aqui para algo especial</button>
 
     <!-- Botões de idioma -->
@@ -291,6 +288,7 @@ git push -u origin main
     </div>
 
     <script>
+        // Lista de arquivos de áudio
         const audioFiles = [
             "audio1.mp3",
             "audio2.mp3",
@@ -303,7 +301,7 @@ git push -u origin main
         let currentAudioIndex = 0;
         const audio = new Audio(audioFiles[currentAudioIndex]);
 
-        // Botões de controle de áudio
+        // Controles de áudio
         document.getElementById("play").addEventListener("click", () => {
             audio.play();
         });
@@ -325,14 +323,14 @@ git push -u origin main
             audio.play();
         });
 
-        // Funções existentes
+        // Exibe texto ao clicar no botão
         function toggleText() {
             const textContent = document.querySelector('.text-content');
             textContent.style.display = 'block';
         }
 
+        // Altera idioma
         function setLanguage(lang) {
-            // Alterar idioma do texto
             console.log(`Idioma alterado para: ${lang}`);
         }
     </script>
