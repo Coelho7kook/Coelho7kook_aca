@@ -154,185 +154,19 @@ git push -u origin main
                 ru: [
                     "Для моей подруги, Даже когда мир кажется тяжёлым, я хочу, чтобы ты знала, что ты не одна. Путь может быть трудным, а тени могут казаться более глубокими, но твоя сила гораздо больше, чем ты думаешь.",
                     "Как и Микелла, сталкивающаяся со своими битвами, ты тоже достаточно сильна, чтобы преодолеть любую бурю. Моменты боли мимолётны, и даже в самые тёмные дни есть свет, который снова засияет.",
-                    "Не позволяй грусти овладеть тобой, потому что каждая слеза — это шаг к воссоединению с твоим внутренним миром. Жизнь полна неопределенности, она ставит перед нами испытания, но каждое испытание учит нас ценить ещё больше те маленькие вещи, которые приносят радость.",
-                    "Верь в себя, даже когда слова, кажется, не могут помочь, и тишина пытается заполнить пустоту. Мы все связаны искренними чувствами, и твоё существование — это уникальный подарок.",
-                    "Так что не бойся двигаться вперёд, потому что всегда есть протянутая рука, тёплое слово и сердце, которое глубоко чувствует твою боль. Ты сильная. Ты любима."
+                    "Не позволяй грусти овладеть тобой, потому что каждая слеза — это шаг к воссоединению с твоим внутренним покоем. Жизнь, со всеми её неопределённостями, бросает нам вызовы, но каждый вызов учит ценить маленькие радости, которые приносят счастье.",
+                    "Верь в себя, даже когда слова кажутся недостаточными, а тишина пытается заполнить пустоту. Мы все связаны искренними чувствами, и твое существование — это уникальный дар.",
+                    "Поэтому не бойся двигаться вперёд, ведь всегда найдётся протянутая рука, доброе слово и сердце, глубоко ощущающее твою боль. Ты сильна. Ты любима."
                 ]
             };
 
-            // Apresenta o texto correspondente ao idioma escolhido
+            const selectedTexts = texts[lang];
             const textContent = document.querySelector('.text-content');
-            textContent.innerHTML = texts[lang].map(p => `<p>${p}</p>`).join('');
-            playRandomAudio();  // Toca o áudio aleatório ao mudar o idioma
+            textContent.innerHTML = selectedTexts.map((text) => `<p>${text}</p>`).join('');
         }
 
-        // Toca o áudio aleatório quando a página é carregada
-        window.onload = function() {
-            playRandomAudio();
-        }
-    </script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texto com Tradução de Idiomas</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .text-content {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            display: none; /* Oculta o texto inicialmente */
-        }
-
-        .button-play {
-            background-color: #ffb3d9; /* Rosa Claro */
-            color: white;
-            font-size: 20px;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .button-play:hover {
-            background-color: #ff69b4; /* Rosa Intenso */
-        }
-
-        .button-language {
-            margin: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            color: white;
-            background-color: #6a1b9a;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        .button-language:hover {
-            background-color: #4a148c;
-        }
-
-        .audio-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .audio-buttons button {
-            background: rgba(255, 255, 255, 0.5); /* Semitransparente */
-            border: none;
-            color: #000;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .audio-buttons button:hover {
-            background: rgba(255, 255, 255, 0.8); /* Destaque ao passar o mouse */
-            transform: scale(1.1);
-        }
-    </style>
-</head>
-<body>
-    <!-- Texto -->
-    <div class="text-content">
-        <p>Para Minha Amiga, Mesmo quando o mundo parece pesado...</p>
-    </div>
-
-    <!-- Botão para exibir texto -->
-    <button class="button-play" onclick="toggleText()">Por favor, clique aqui para algo especial</button>
-
-    <!-- Botões de idioma -->
-    <div>
-        <button class="button-language" onclick="setLanguage('pt')">Português</button>
-        <button class="button-language" onclick="setLanguage('en')">Inglês</button>
-        <button class="button-language" onclick="setLanguage('ja')">Japonês</button>
-        <button class="button-language" onclick="setLanguage('ru')">Russo</button>
-    </div>
-
-    <!-- Botões de controle de áudio -->
-    <div class="audio-buttons">
-        <button id="previous">⏮️</button>
-        <button id="play">▶️</button>
-        <button id="pause">⏸️</button>
-        <button id="next">⏭️</button>
-    </div>
-
-    <script>
-        // Lista de arquivos de áudio
-        const audioFiles = [
-            "audio1.mp3",
-            "audio2.mp3",
-            "audio3.mp3",
-            "audio4.mp3",
-            "audio5.mp3",
-            "audio6.mp3"
-        ];
-
-        let currentAudioIndex = 0;
-        const audio = new Audio(audioFiles[currentAudioIndex]);
-
-        // Controles de áudio
-        document.getElementById("play").addEventListener("click", () => {
-            audio.play();
-        });
-
-        document.getElementById("pause").addEventListener("click", () => {
-            audio.pause();
-        });
-
-        document.getElementById("next").addEventListener("click", () => {
-            currentAudioIndex = (currentAudioIndex + 1) % audioFiles.length;
-            audio.src = audioFiles[currentAudioIndex];
-            audio.play();
-        });
-
-        document.getElementById("previous").addEventListener("click", () => {
-            currentAudioIndex =
-                (currentAudioIndex - 1 + audioFiles.length) % audioFiles.length;
-            audio.src = audioFiles[currentAudioIndex];
-            audio.play();
-        });
-
-        // Exibe texto ao clicar no botão
-        function toggleText() {
-            const textContent = document.querySelector('.text-content');
-            textContent.style.display = 'block';
-        }
-
-        // Altera idioma
-        function setLanguage(lang) {
-            console.log(`Idioma alterado para: ${lang}`);
-        }
+        // Tocar áudio aleatório ao carregar a página
+        playRandomAudio();
     </script>
 </body>
 </html>
