@@ -170,3 +170,108 @@ git push -u origin main
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Áudios</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://truth.bahamut.com.tw/artwork/202210/c4b979ce2108d38e2e4a015fe8763082.GIF?w=1000') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .audio-controls {
+            margin-top: 20px;
+        }
+
+        .audio-button {
+            background-color: #ffb3d9; /* Rosa Claro */
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .audio-button:hover {
+            background-color: #ff69b4; /* Rosa Intenso */
+        }
+    </style>
+</head>
+<body>
+    <h1>Controle de Áudios</h1>
+
+    <div class="audio-controls">
+        <!-- Botões de controle -->
+        <button class="audio-button" onclick="playAudio()">Tocar</button>
+        <button class="audio-button" onclick="pauseAudio()">Pause</button>
+        <button class="audio-button" onclick="previousAudio()">Voltar</button>
+        <button class="audio-button" onclick="nextAudio()">Avançar</button>
+    </div>
+
+    <script>
+        // Lista de áudios
+        const audioFiles = [
+            'audio1.mp3',
+            'audio2.mp3',
+            'audio3.mp3',
+            'audio4.mp3',
+            'audio5.mp3',
+            'audio6.mp3'
+        ];
+
+        let currentAudioIndex = 0; // Índice do áudio atual
+        let audioPlayer = new Audio(audioFiles[currentAudioIndex]); // Objeto de áudio
+
+        // Função para tocar áudio
+        function playAudio() {
+            audioPlayer.play();
+        }
+
+        // Função para pausar áudio
+        function pauseAudio() {
+            audioPlayer.pause();
+        }
+
+        // Função para avançar para o próximo áudio
+        function nextAudio() {
+            if (currentAudioIndex < audioFiles.length - 1) {
+                audioPlayer.pause();
+                currentAudioIndex++;
+                audioPlayer = new Audio(audioFiles[currentAudioIndex]);
+                audioPlayer.play();
+            } else {
+                alert("Você já está no último áudio!");
+            }
+        }
+
+        // Função para voltar ao áudio anterior
+        function previousAudio() {
+            if (currentAudioIndex > 0) {
+                audioPlayer.pause();
+                currentAudioIndex--;
+                audioPlayer = new Audio(audioFiles[currentAudioIndex]);
+                audioPlayer.play();
+            } else {
+                alert("Você já está no primeiro áudio!");
+            }
+        }
+    </script>
+</body>
+</html>
